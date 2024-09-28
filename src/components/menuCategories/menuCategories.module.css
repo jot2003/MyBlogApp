@@ -1,0 +1,37 @@
+.categoryList{
+    margin-top: 35px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.categoryItem{
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.categoryItem.music {
+    background-color: #57c4ff31;
+  }
+  
+  .categoryItem.code {
+    background-color: #ffeb3b31;
+  }
+  
+  .categoryItem.fitness {
+    background-color: #4caf5031; 
+  }
+  
+  .categoryItem.movie {
+    background-color: #ff572231; 
+  }
+  
+  .categoryItem.food {
+    background-color: #ff704331;
+  }
+
+  .categoryItem.myidols {
+    background-color: #9c27b031;
+  }
