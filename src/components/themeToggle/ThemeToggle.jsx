@@ -5,8 +5,7 @@ import { ThemeContext } from "@/context/ThemeContext";
 import styles from "./themeToggle.module.css";
 import Image from "next/image";
 const ThemeToggle = () => {
-  const {toggle, theme} = useContext(ThemeContext)
-  console.log(theme)
+  const {toggle, theme} = useContext(ThemeContext);
 
   return (
     <div 

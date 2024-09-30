@@ -3,75 +3,41 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from "./categoryList.module.css";
 
-const CategoryList = () => {
+const getData = async () => {
+  const res = await fetch("http://localhost:3000/api/categories",{
+    cache: "no-store",
+  });
+  if(!res.ok){
+    throw new Error("Failed!");
+  }
+  return res.json()
+};
+
+const CategoryList = async () => {
+  const data = await getData();
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Popular Categories</h1>
       <div className={styles.categories}>
-        <Link href="/blog?cat=music" className={`${styles.category} ${styles.music}`}>
-          <Image 
-            src="/style.png" 
+        {data?.map(item=>(
+
+        <Link 
+          href="/blog?cat=music" 
+          className={`${styles.category} ${styles[item.slug]}`}
+          key={item._id}
+          >
+          {item.img && (
+            <Image 
+            src={item.img}
             alt="Music"
             width={32}
             height={32}
             className={styles.image}
-          />
-          Music
+          />)}
+          {item.title}
         </Link>
-
-        <Link href="/blog?cat=code" className={`${styles.category} ${styles.code}`}>
-          <Image 
-            src="/coding.png" 
-            alt="Học code"
-            width={32}
-            height={32}
-            className={styles.image}
-          />
-          Học code
-        </Link>
-
-        <Link href="/blog?cat=fitness" className={`${styles.category} ${styles.fitness}`}>
-          <Image 
-            src="/culture.png" 
-            alt="Chuyện đi tập"
-            width={32}
-            height={32}
-            className={styles.image}
-          />
-          Chuyện đi tập
-        </Link>
-
-        <Link href="/blog?cat=movie" className={`${styles.category} ${styles.movie}`}>
-          <Image 
-            src="/travel.png" 
-            alt="Phim ảnh"
-            width={32}
-            height={32}
-            className={styles.image}
-          />
-          Phim ảnh
-        </Link>
-
-        <Link href="/blog?cat=food" className={`${styles.category} ${styles.food}`}>
-          <Image 
-            src="/food.png" 
-            alt="Chuyện Ăn uống"
-            width={32}
-            height={32}
-            className={styles.image}
-          />
-          Chuyện Ăn uống
-        </Link>
-        <Link href="/blog?cat=myidols" className={`${styles.category} ${styles.myidols}`}>
-          <Image 
-            src="/myidols.png" 
-            alt="My Idols"
-            width={32}
-            height={32}
-            className={styles.image}
-          />
-          My Idols
-        </Link>
+        ))
+        }
 
       </div>
     </div>
